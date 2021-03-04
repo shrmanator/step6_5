@@ -14,7 +14,7 @@ module.exports = function(){
     }
 
     function getGuides(res, mysql, context, complete){
-        mysql.pool.query("SELECT GuideRegistrations.userID as id, firstName, lastName,password,email,zipCode From GuideRegistrations", function(error, results, fields){
+        mysql.pool.query("SELECT GuideRegistrations.userID as id, firstName, lastName, password, email, zipCode From GuideRegistrations", function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
