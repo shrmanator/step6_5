@@ -1,0 +1,44 @@
+<html>
+{{#each foo}}
+{{this}}
+{{/each}}
+<div>
+<h3> Associate Certificate(s) with a Person </h3>
+    <form id="add_guides_certificates" action="/guides_certs" method="post">
+    Person: <select name='pid'>
+        {{#each guides}}
+          <option value='{{userID}}'>{{firstName}} {{lastName}}</option>
+        {{/each}}
+    </select>
+    <br>
+    Certificates:<sup>Multi-select</sup> <select multiple name="certs"> 
+        {{!-- We display title but the value that is submitted through the form is actually the certificate's id --}}
+        {{#each certificates}}
+            <option value="{{userID}}">{{title}}</option>
+        {{/each}}
+    </select><br>
+    <input type="submit" value="Submit">
+    </form>
+</div>
+<br/>
+<h3> List of Guides with their Certifications </h3>
+<table>
+    <thead> 
+        <th>Name</th> 
+        <th>Certificate</th> 
+    </thead> 
+    <tbody> 
+        {{#each guides_with_certs}}
+        <tr> 
+            <td>{{name}}</td> 
+            <td>{{certificate}}</td> 
+            <td><button onclick="deleteGuidesCert({{pid}},{{cid}})">Delete</button></td>
+            <td><a href='#' onclick='javascript: alert("You can implement it just like the Add form.")'>Update</a></td>
+        </tr>
+        {{else}}
+        <b> No guides with any certifications found! Grant some using the form. </b>
+        {{/each}} 
+
+    </tbody>
+</table> 
+</html>

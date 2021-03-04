@@ -1,0 +1,15 @@
+<html>
+    <h1>Update {{person.firstName}} {{person.lastName}}:</h1>
+    <form id="update-guide" action="/guides.js" method="post">
+        First name: <input type="text" name="firstName" value="{{guide.firstName}}"><br>
+        Last name: <input type="text" name="lastName" value="{{guide.lastName}}"><br>
+        climate: <select name="climate" id="climate-selector">
+            {{#each climates}}
+                <option value="{{userID}}">{{firstName}}</option>
+            {{/each}}
+        </select><br>
+        zipCode: <input type="number" name="zipCode" value="{{guide.zipCode}}"><br>
+    </form>
+    <button onclick="updateguides({{guide.userID}})">Update</button>
+    <script defer>selectPlanet({{guide.climate}});</script>
+</html>
