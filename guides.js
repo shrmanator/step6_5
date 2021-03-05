@@ -1,3 +1,4 @@
+console.log("guide.js open")
 module.exports = function(){
     var express = require('express');
     var router = express.Router();
@@ -87,6 +88,7 @@ module.exports = function(){
 
     /*Display all people from a given climate. Requires web based javascript to delete users with AJAX*/
     router.get('/filter/:climates', function(req, res){
+        console.log(req.params);
         var callbackCount = 0;
         var context = {};
         context.jsscripts = ["deleteguide.js","filterguides.js","searchguides.js"];
@@ -98,7 +100,6 @@ module.exports = function(){
             if(callbackCount >= 2){
                 res.render('guides', context);
             }
-
         }
     });
 

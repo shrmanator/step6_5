@@ -1,6 +1,6 @@
 function deleteguide(id){
     $.ajax({
-        url: '/people/' + id,
+        url: '/guides/' + id,
         type: 'DELETE',
         success: function(result){
             window.location.reload(true);
@@ -8,12 +8,12 @@ function deleteguide(id){
     })
 };
 
-function deletePeopleCert(pid, cid){
+function deleteGuidesCert(pid, cid){
   $.ajax({
-      url: '/people_certs/pid/' + pid + '/cert/' + cid,
+      url: '/guides_certs/pid/' + pid + '/cert/' + cid,
       type: 'DELETE',
       success: function(result){
-          if(result.responseText != undefined){
+          if(result.responseText !== undefined){
             alert(result.responseText)
           }
           else {
