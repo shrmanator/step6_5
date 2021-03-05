@@ -22,7 +22,7 @@ app.set('mysql', mysql);
 app.use('/guides_certs', require('./guides_certs.js'));
 app.use('/guides', require('./guides.js'));
 app.use('/climates', require('./climates.js'));
-app.use('/', express.static('public'));
+app.use('/', (req,res)=> res.redirect('/guides'));
 
 app.use(function(req,res){
   res.status(404);
