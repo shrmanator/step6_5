@@ -14,11 +14,10 @@
 </div>
 
 <div align="center">
-    <form id='filter_guides' action='' method=''>
-    <!--- this form does not submit directly, the button handles all the interaction with backend -->
+
         <label for='climate_filter'></label><select id='climate_filter' name="climate">
             {{#each climates}}
-                <option value="{{userID}}">{{climate}}</option>
+                <option value="{{climate}}">{{climate}}</option>
             {{/each}}
         </select>
         <br>
@@ -26,7 +25,6 @@
         <input type="button" value="search climate" onclick="filterGuidesByClimate()">
         <br>
         <br>
-    </form>
 
     <table>
         <thead>
@@ -36,16 +34,16 @@
             <th>Zip Code</th>
         </thead>
         <tbody>
-            {{#each guides}}
-            <tr>
-                <td>{{firstName}}</td>
-                <td>{{lastName}}</td>
-                <td>{{email}}</td>
-                <td>{{climate}}</td>
-
-            </tr>
-            {{/each}}
+                {{#each guides}}
+                <tr>
+                    <td>{{firstName}}</td>
+                    <td>{{lastName}}</td>
+                    <td>{{email}}</td>
+                    <td>{{zipCode}}</td>
+                </tr>
+                {{/each}}
         </tbody>
     </table>
 </div>
-<script src="public/filterguides.js"></script>
+
+<script src="filterguides.js"></script>
