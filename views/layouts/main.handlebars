@@ -3,13 +3,16 @@
 <head>
 	<title>Demo Page</title>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-    {{!-- {{#each jsscripts}}
-    <script src="/static/{{this}}"></script>
-    {{/each}} --}}
+    <div class="topnav" align="center" style="background-color: #f1f1f1">
+        <h1 align="center" style="background-color: #f1f1f1">WEATHER VAULT</h1>
+        <a href="/guides_certs" class="button"><i class="fa fa-sign-in"> Login |</i></a>
+        <a href="guides_certs.handlebars" class="button"><i class="fa fa-user-plus"> Sign up |</i></a>
+        <a href="home.handlebars" class="button"><i class="fa fa-map-marker"> Locations |</i></a>
+        <a href="serverClimate.handlebars" class="button"><i class="fa fa-user-o"> My page</i></a>
+        <a href="update-guide.handlebars" class="button"><i class="fa fa-user-o"> updates</i></a>
+    </div>
 </head>
 <body>
 	{{{body}}}
 </body>
-
-
 </html>

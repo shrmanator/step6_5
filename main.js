@@ -15,6 +15,7 @@ app.use('/', require('./guides.js')); // default route
 app.use('/guides', require('./guides.js'));
 app.use('/guides_certs', require('./guides_certs.js'));
 app.use('/climates', require('./climates.js'));
+app.use('/update-guide', require('./guides.js'))
 
 app.use(function(req,res){
   res.status(404);
