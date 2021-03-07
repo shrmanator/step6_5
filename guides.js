@@ -1,10 +1,8 @@
-console.log("guide.js open")
-
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const mysql = require('./dbcon.js');
 
-function getClimates(res, mysql, context, complete){
+function getClimates(res, context, complete){
     mysql.pool.query("SELECT climate from GuideClimates", function(error, results, fields){
         if(error){
             res.write(JSON.stringify(error));
@@ -15,7 +13,7 @@ function getClimates(res, mysql, context, complete){
     });
 }
 
-function getGuides(res, mysql, context, complete){
+function getGuides(res, context, complete){
     mysql.pool.query("SELECT GuideRegistrations.userID as id, firstName, lastName, password, email, zipCode From GuideRegistrations", function(error, results, fields){
         if(error){
             res.write(JSON.stringify(error));
@@ -26,16 +24,15 @@ function getGuides(res, mysql, context, complete){
     });
 }
 
-function getGuidesByClimate(req, res, mysql, context, complete){
-    var query = "SELECT * FROM GuideRegistrations CG INNER JOIN GuideClimates GC on CG.userID = GC.userID";
+function getGuidesByClimate(req, res, context, complete){
+    var query = "SELECT * FROM GuideRegistrations CG INNER JOIN GuideClimates GC on CG.userID = GC.userID WHERE GC.climate = ?";
     var inserts = [req.params.climate]
     mysql.pool.query(query, inserts, function(error, results, fields){
         if(error){
             res.write(JSON.stringify(error));
             res.end();
         }
-        context.climate = results;
-        console.log(results)
+        context.guides = results;
         complete();
     });
 }
@@ -56,7 +53,7 @@ function getGuidesByClimate(req, res, mysql, context, complete){
 //     });
 // }
 
-function getGuide(res, mysql, context, id, complete){
+function getGuide(res, context, id, complete){
     var sql = "SELECT GuideRegistrations.userID as id, firstName, lastName,password,email,zipCode From GuideRegistrations WHERE userID = ?";
     var inserts = [id];
     mysql.pool.query(sql, inserts, function(error, results, fields){
@@ -70,34 +67,29 @@ function getGuide(res, mysql, context, id, complete){
 }
 
 /*Display all people. Requires web based javascript to delete users with AJAX*/
-
 router.get('/', function(req, res){
     var callbackCount = 0;
     var context = {};
-    // var mysql = req.app.get('mysql');
-    getGuides(res, mysql, context, complete);
-    getClimates(res, mysql, context, complete);
+    getGuides(res, context, complete);
+    getClimates(res, context, complete);
     function complete(){
         callbackCount++;
         if(callbackCount >= 2){
             res.render('guides', context);
         }
-
     }
 });
 
 /*Display all people from a given climate. Requires web based javascript to delete users with AJAX*/
-router.get('/filter/:climates', function(req, res){
-    console.log(req.params);
+router.get('/filter/:climate', function(req, res){
     var callbackCount = 0;
     var context = {};
-     
-    // var mysql = req.app.get('mysql');
-    getGuidesByClimate(req,res, mysql, context, complete);
-    getClimates(res, mysql, context, complete);
+    getClimates(res, context, complete);
+    getGuidesByClimate(req, res, context, complete);
     function complete(){
         callbackCount++;
         if(callbackCount >= 2){
+            // console.log(context)
             res.render('guides', context);
         }
     }
@@ -107,9 +99,10 @@ router.get('/filter/:climates', function(req, res){
 router.get('/search/:s', function(req, res){
     var callbackCount = 0;
     var context = {};
+    // context.jsscripts = ["deleteguide.js","filterguides.js","searchguides.js"];
     // var mysql = req.app.get('mysql');
-    getGuidesByClimate(req, res, mysql, context, complete);
-    getClimates(res, mysql, context, complete);
+    getGuidesByClimate(req, res, context, complete);
+    getClimates(res, context, complete);
     function complete(){
         callbackCount++;
         if(callbackCount >= 2){
@@ -123,9 +116,10 @@ router.get('/search/:s', function(req, res){
 router.get('/:id', function(req, res){
     callbackCount = 0;
     var context = {};
+    // context.jsscripts = ["selectedclimates.js", "updateguides.js"];
     // var mysql = req.app.get('mysql');
-    getGuide(res, mysql, context, req.params.id, complete);
-    getClimates(res, mysql, context, complete);
+    getGuide(res, context, req.params.id, complete);
+    getClimates(res, context, complete);
     function complete(){
         callbackCount++;
         if(callbackCount >= 2){
@@ -135,7 +129,6 @@ router.get('/:id', function(req, res){
 });
 
 /* Adds a guide, redirects to the people page after adding */
-
 router.post('/', function(req, res){
     console.log(req.body.climates)
     console.log(req.body)
@@ -154,7 +147,6 @@ router.post('/', function(req, res){
 });
 
 /* The URI that update data is sent to in order to update a guide */
-
 router.put('/:id', function(req, res){
     // var mysql = req.app.get('mysql');
     console.log(req.body)
@@ -174,21 +166,20 @@ router.put('/:id', function(req, res){
 });
 
 /* Route to delete a guide, simply returns a 202 upon success. Ajax will handle this. */
-
-router.delete('/:id', function(req, res) {
+router.delete('/:id', function(req, res){
     // var mysql = req.app.get('mysql');
     var sql = "DELETE FROM GuideRegistrations WHERE userID = ?";
     var inserts = [req.params.id];
-    sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
-        if (error) {
+    sql = mysql.pool.query(sql, inserts, function(error, results, fields){
+        if(error){
             console.log(error)
             res.write(JSON.stringify(error));
             res.status(400);
             res.end();
-        } else {
+        }else{
             res.status(202).end();
         }
-    });
-});
+    })
+})
 
 module.exports = router;
