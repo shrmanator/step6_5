@@ -1,28 +1,20 @@
-
-/*
-    Uses express, dbcon for database connection, body parser to parse form data
-    handlebars for HTML templates
-*/
-
 var express = require('express');
-var mysql = require('./dbcon.js');
-var bodyParser = require('body-parser');
-
 var app = express();
-var handlebars = require('express-handlebars').create({
-        defaultLayout:'main',
-        });
+var handlebars = require('express-handlebars');
 
-app.engine('handlebars', handlebars.engine);
-app.use(bodyParser.urlencoded({extended:true}));
-app.use('/static', express.static('public'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static('public')); // public folder is static
+
+app.engine('handlebars', handlebars());
 app.set('view engine', 'handlebars');
 app.set('port', process.argv[2]);
-app.set('mysql', mysql);
-app.use('/guides_certs', require('./guides_certs.js'));
+
+// Routes
+app.use('/', require('./guides.js')); // default route
 app.use('/guides', require('./guides.js'));
+app.use('/guides_certs', require('./guides_certs.js'));
 app.use('/climates', require('./climates.js'));
-app.use('/', express.static('public'));
 
 app.use(function(req,res){
   res.status(404);
@@ -35,6 +27,7 @@ app.use(function(err, req, res, next){
   res.render('500');
 });
 
-app.listen(app.get('port'), function(){
-  console.log('Express started on http://localhost:' + app.get('port') + '; press Ctrl-C to terminate.');
+app.listen(app.get('port'), function () {
+  console.log(
+    `Express started on http://localhost:${app.get('port')} press Ctrl-C to terminate.`);
 });
