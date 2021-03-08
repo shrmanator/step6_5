@@ -114,10 +114,8 @@ router.get('/search/:s', function(req, res){
 /* Display one guide for the specific purpose of updating people (used in home.handlebars) */
 
 router.get('/:id', function(req, res){
-    callbackCount = 0;
+    var callbackCount = 0;
     var context = {};
-    // context.jsscripts = ["selectedclimates.js", "updateguides.js"];
-    // var mysql = req.app.get('mysql');
     getGuide(res, context, req.params.id, complete);
     getClimates(res, context, complete);
     function complete(){
