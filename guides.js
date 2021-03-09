@@ -95,6 +95,7 @@ router.get('/filter/:climate', function(req, res){
     }
 });
 
+
 /*Display all people whose name starts with a given string. Requires web based javascript to delete users with AJAX */
 router.get('/search/:s', function(req, res){
     var callbackCount = 0;
@@ -111,7 +112,7 @@ router.get('/search/:s', function(req, res){
     }
 });
 
-/* Display one guide for the specific purpose of updating people (used in home.handlebars) */
+/* Display one guide for the specific purpose of updating guides (used in home.handlebars) */
 
 router.get('/:id', function(req, res){
     var callbackCount = 0;
@@ -121,7 +122,7 @@ router.get('/:id', function(req, res){
     function complete(){
         callbackCount++;
         if(callbackCount >= 2){
-            res.render('update-guide', context);
+            res.render('home', context);
         }
     }
 });
@@ -131,15 +132,15 @@ router.post('/', function(req, res){
     console.log(req.body.climates)
     console.log(req.body)
     // var mysql = req.app.get('mysql');
-    var sql = "INSERT INTO GuideRegistrations (firstName, lastName, email, zipCode) VALUES (?,?,?,?)";
-    var inserts = [req.body.firstName, req.body.lastName, req.body.email, req.body.zipCode];
+    var sql = "INSERT INTO GuideRegistrations (firstName, lastName, password, email, zipCode, climate) VALUES (?,?,?,?,?,?)";
+    var inserts = [req.body.firstName, req.body.lastName, req.body.password, req.body.email, req.body.zipCode, req.body.climate];
     sql = mysql.pool.query(sql,inserts,function(error, results, fields){
         if(error){
             console.log(JSON.stringify(error))
             res.write(JSON.stringify(error));
             res.end();
         }else{
-            res.redirect('/guides');
+            res.redirect('/home');
         }
     });
 });
@@ -150,7 +151,7 @@ router.put('/:id', function(req, res){
     console.log(req.body)
     console.log(req.params.id)
     var sql = "UPDATE GuideRegistrations SET firstName=?, lastName=?, email=?, climate=? zipCode=? WHERE userID=?";
-    var inserts = [req.body.firstName, req.body.lastName, req.body.email, req.body.zipCode, req.params.id];
+    var inserts = [req.body.firstName, req.body.lastName, req.body.email, req.body.climate, req.body.zipCode, req.params.id];
     sql = mysql.pool.query(sql,inserts,function(error, results, fields){
         if(error){
             console.log(error)

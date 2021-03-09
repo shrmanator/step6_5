@@ -1,3 +1,19 @@
-<h1>MySQL Results:</h1>
-    <h1>Fill in you information below to become a Weather Guides.</h1>
-<p>{{results}}</p>
+<html>
+{{#each foo}}
+    {{this}}
+{{/each}}
+<h3>Add new Guide:</h3>
+<form id="addGuide" action="/guides" method="post">
+    First name: <input type="text" name="firstName"><br>
+    Last name: <input type="text" name="lastName"><br>
+    email: <input type="text" name="email"><br>
+    Password: <input type="text" name="password"><br>
+    Zip Code: <input type="text" name="zipCode"><br>
+    Climate: <select name="climate">
+    {{#each planets}}
+        <option value="{{userID}}">{{firstName}}</option>
+    {{/each}}
+</select><br>
+    <input type="submit" value="Submit">
+</form>
+<br/>
