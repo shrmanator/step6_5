@@ -1,15 +1,22 @@
+<!-- Guide Sign Up Page -->
+
 <html>
-    <h1>Update {{person.firstName}} {{person.lastName}}:</h1>
-    <form id="update-guide" action="/guides.js" method="post">
-        First name: <input type="text" name="firstName" value="{{guide.firstName}}"><br>
-        Last name: <input type="text" name="lastName" value="{{guide.lastName}}"><br>
-        climate: <select name="climate" id="climate-selector">
-            {{#each climates}}
-                <option value="{{userID}}">{{firstName}}</option>
-            {{/each}}
-        </select><br>
-        zipCode: <input type="number" name="zipCode" value="{{guide.zipCode}}"><br>
-    </form>
-    <button onclick="updateguides({{guide.userID}})">Update</button>
-    <script defer>"selectedclimates({{guide.climate}})"</script>
+    <div align="center">
+        <h2>Fill in your information to become a weather guide.</h2>
+        <form id="update-guide" action="/guides.js" method="post">
+            <input placeholder="first name" type="text" name="firstName" value="{{guide.firstName}}">
+            <br>
+            <input placeholder="last name" type="text" name="lastName" value="{{guide.lastName}}">
+            <br>
+            <select name="climate" id="climate-selector">
+                {{#each climates}}
+                    <option value="{{userID}}">{{firstName}}</option>
+                {{/each}}
+            </select>
+            <br>
+            <input placeholder="zip code" type="number" name="zipCode" value="{{guide.zipCode}}"><br>
+        </form>
+        <button onclick="updateguides({{guide.userID}})">Create Account</button>
+        <script defer>"selectedclimates({{guide.climate}})"</script>
+    </div>
 </html>
