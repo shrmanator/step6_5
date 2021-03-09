@@ -131,7 +131,7 @@ router.post('/', function(req, res){
     console.log(req.body.climates)
     console.log(req.body)
     // var mysql = req.app.get('mysql');
-    var sql = "INSERT INTO GuideRegistrations (firstName, lastName,email,zipCode) VALUES (?,?,?,?)";
+    var sql = "INSERT INTO GuideRegistrations (firstName, lastName, email, zipCode) VALUES (?,?,?,?)";
     var inserts = [req.body.firstName, req.body.lastName, req.body.email, req.body.zipCode];
     sql = mysql.pool.query(sql,inserts,function(error, results, fields){
         if(error){
@@ -149,7 +149,7 @@ router.put('/:id', function(req, res){
     // var mysql = req.app.get('mysql');
     console.log(req.body)
     console.log(req.params.id)
-    var sql = "UPDATE GuideRegistrations SET firstName=?, lastName=?, email=?, zipCode=? WHERE userID=?";
+    var sql = "UPDATE GuideRegistrations SET firstName=?, lastName=?, email=?, climate=? zipCode=? WHERE userID=?";
     var inserts = [req.body.firstName, req.body.lastName, req.body.email, req.body.zipCode, req.params.id];
     sql = mysql.pool.query(sql,inserts,function(error, results, fields){
         if(error){
