@@ -14,6 +14,7 @@ app.set('port', process.argv[2]);
 app.use('/guides', require('./guides.js'));
 app.use('/climates', require('./climates.js'));
 app.use('/add-guide', require('./guides.js'));
+app.use('update-guide', require('./guides.js'));
 app.use('/', require('./guides.js')); // default route
 
 app.use(function(req,res){

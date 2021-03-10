@@ -127,30 +127,32 @@ router.get('/:id', function(req, res){
     }
 });
 
-/* Adds a guide, redirects to the people page after adding */
-router.post('/', function(req, res){
+/*
+METHOD WORKS!!!
+ Adds a guide, redirects to the people page after adding */
+router.post('/', function(req, res) {
     console.log(req.body.climates)
     console.log(req.body)
     // var mysql = req.app.get('mysql');
     var sql = "INSERT INTO GuideRegistrations (firstName, lastName, password, email, zipCode, climate) VALUES (?,?,?,?,?,?)";
     var inserts = [req.body.firstName, req.body.lastName, req.body.password, req.body.email, req.body.zipCode, req.body.climate];
-    sql = mysql.pool.query(sql,inserts,function(error, results, fields){
-        if(error){
+    sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
+        if (error) {
             console.log(JSON.stringify(error))
             res.write(JSON.stringify(error));
             res.end();
-        }else{
+        } else {
             res.redirect('/home');
         }
     });
 });
 
-/* The URI that update data is sent to in order to update a guide */
+/* The URL that update data is sent to in order to update a guide */
 router.put('/:id', function(req, res){
     // var mysql = req.app.get('mysql');
     console.log(req.body)
     console.log(req.params.id)
-    var sql = "UPDATE GuideRegistrations SET firstName=?, lastName=?, email=?, climate=? zipCode=? WHERE userID=?";
+    var sql = "UPDATE GuideRegistrations SET firstName=?, lastName=?, email=?, climate=?, zipCode=? WHERE userID=?";
     var inserts = [req.body.firstName, req.body.lastName, req.body.email, req.body.climate, req.body.zipCode, req.params.id];
     sql = mysql.pool.query(sql,inserts,function(error, results, fields){
         if(error){
@@ -181,4 +183,4 @@ router.delete('/:id', function(req, res){
     })
 })
 
-module.exports = router;
+module.exports = router

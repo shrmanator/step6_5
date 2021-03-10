@@ -2,18 +2,23 @@
 {{#each foo}}
     {{this}}
 {{/each}}
-<h3>Add new Guide:</h3>
-<form id="addGuide" action="/guides" method="post">
-    First name: <input type="text" name="firstName"><br>
-    Last name: <input type="text" name="lastName"><br>
-    email: <input type="text" name="email"><br>
-    Password: <input type="text" name="password"><br>
-    Zip Code: <input type="text" name="zipCode"><br>
-    Climate: <select name="climate">
-    {{#each planets}}
-        <option value="{{userID}}">{{firstName}}</option>
-    {{/each}}
-</select><br>
-    <input type="submit" value="Submit">
-</form>
-<br/>
+<div align="center">
+    <h3>Become a Weather Vault Guide</h3>
+    <form id="addGuide" action="/guides" method="post">
+        <input required placeholder="first name" type="text" name="firstName"><br>
+        <input required placeholder="last name" type="text" name="lastName"><br>
+        <input required placeholder="email" type="text" name="email"><br>
+        <input required placeholder="password" type="text" name="password"><br>
+        <input required placeholder="zip code" type="text" name="zipCode"><br>
+        <br>
+        <select name="climate">
+        {{#each climates}}
+            <option value="{{climate}}">{{climate}}</option>
+        {{/each}}
+        </select>
+        <br>
+        <br>
+        <input type="submit" value="become a guide">
+    </form>
+    <br/>
+</div>

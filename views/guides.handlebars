@@ -1,8 +1,8 @@
 <div align="center">
     <br>
     <br>
-    <h2> "Interested in moving to a new location with a different climate? Our guides can help you!" </h2>
-    <h2>To see our list of Guides, select your desired climate from the drop-box below, then press search.</h2>
+    <h2> "Interested in moving to a new location with a different climate? Our Guides can help you!" </h2>
+    <h2>Select your desired climate to find a knowledgeable Guide.</h2>
 </div>
 
 <div align="center">
@@ -14,10 +14,9 @@
         </select>
         <br>
         <br>
-        <input type="button" value="search climate" onclick="filterGuidesByClimate()">
+        <input type="button" value="search guides" onclick="filterGuidesByClimate()">
         <br>
         <br>
-
     <table>
         <thead>
             <th>First Name</th>
@@ -38,4 +37,9 @@
     </table>
 </div>
 
-<script src="filterguides.js"></script>
+<script>
+    function filterGuidesByClimate() {
+        let climate_id = document.getElementById('climate_filter').value;
+        window.location = '/guides/filter/' + climate_id
+    }
+</script>
