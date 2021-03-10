@@ -13,18 +13,20 @@ function getGuides(res, context, complete){
     });
 }
 
-router.get('/:firstName', function(req, res){
-    console.log("log_in");
+router.get('/', function(req, res) {
     res.render('log_in')
-    // var callbackCount = 0;
-    // var context = {};
-    // getGuides(res, context, complete);
-    // function complete(){
-    //     callbackCount++;
-    //     if(callbackCount >= 2){
-    //         res.render('log_in', context);
-    //     }
-    // }
+})
+
+router.get('/:firstName', function(req, res){
+    var callbackCount = 0;
+    var context = {};
+    getGuides(res, context, complete);
+    function complete(){
+        callbackCount++;
+        if(callbackCount >= 2){
+            res.render('log_in', context);
+        }
+    }
 
 });
 
