@@ -2,6 +2,11 @@ const express = require('express');
 const router = express.Router();
 const mysql = require('./dbcon.js');
 
+
+router.get('/', function(req, res){
+    res.render('update-guide')
+});
+
 /*
 METHOD WORKS!!!
  Adds a guide, redirects to the people page after adding */
@@ -17,10 +22,9 @@ router.post('/', function(req, res) {
             res.write(JSON.stringify(error));
             res.end();
         } else {
-            res.render('/update-guide');
+            res.render('update-guide');
         }
     });
 });
-
 
 module.exports = router
