@@ -4,7 +4,7 @@ const mysql = require('./dbcon.js');
 
 
 router.get('/', function(req, res){
-    res.render('update-guide')
+    res.render('account_info')
 });
 
 /*
@@ -19,7 +19,7 @@ router.post('/', function(req, res) {
             res.write(JSON.stringify(error));
             res.end();
         } else {
-            res.render('update-guide');
+            res.render('account_info');
         }
     });
 });

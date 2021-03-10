@@ -15,7 +15,7 @@ app.use('/log_in', require('./log_in.js'));
 app.use('/home', require('./home.js'));
 app.use('/climates', require('./climates.js'));
 app.use('/add-guide', require('./home.js'));
-app.use('/update-guide', require('./update-guide.js'));
+app.use('/account_info', require('./account_info.js'));
 app.use('/guides_certs', require('./guides_certs.js'));
 app.use('/', require('./home.js')); // default route
 
