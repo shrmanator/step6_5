@@ -96,7 +96,7 @@ router.get('/', function(req, res){
 //     }
 // });
 //
-// /* Display one guide for the specific purpose of updating people (used in home.handlebars) */
+// /* Display one guide for the specific purpose of updating people (used in sign_up.handlebars) */
 // router.get('/:id', function(req, res){
 //     var callbackCount = 0;
 //     var context = {};

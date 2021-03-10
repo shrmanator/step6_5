@@ -48,6 +48,7 @@ function getGuidesWithCertificates(res, mysql, context, complete){
  * displaying a form to associate a person with multiple certificates
  */
 router.get('/', function(req, res){
+    console.log("guides_certs: get");
     var callbackCount = 0;
     var context = {};
     var handlebars_file = 'guides_certs'

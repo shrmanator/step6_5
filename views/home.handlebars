@@ -1,24 +1,45 @@
-<html>
-{{#each foo}}
-    {{this}}
-{{/each}}
 <div align="center">
-    <h3>Become a Weather Vault Guide</h3>
-    <form id="addGuide" action="/guides" method="post">
-        <input required placeholder="first name" type="text" name="firstName"><br>
-        <input required placeholder="last name" type="text" name="lastName"><br>
-        <input required placeholder="email" type="text" name="email"><br>
-        <input required placeholder="password" type="text" name="password"><br>
-        <input required placeholder="zip code" type="text" name="zipCode"><br>
-        <br>
-        <select name="climate">
-        {{#each climates}}
-            <option value="{{climate}}">{{climate}}</option>
-        {{/each}}
+    <br>
+    <br>
+    <h2> "Interested in moving to a new location with a different climate? Our Guides can help you!" </h2>
+    <h2>Select your desired climate to find a knowledgeable Guide.</h2>
+</div>
+
+<div align="center">
+
+        <label for='climate_filter'></label><select id='climate_filter' name="climate">
+            {{#each climates}}
+                <option value="{{climate}}">{{climate}}</option>
+            {{/each}}
         </select>
         <br>
         <br>
-        <input type="submit" value="become a guide">
-    </form>
-    <br/>
+        <input type="button" value="search guides" onclick="filterGuidesByClimate()">
+        <br>
+        <br>
+    <table>
+        <thead>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Zip Code</th>
+        </thead>
+        <tbody>
+                {{#each guides}}
+                <tr>
+                    <td>{{firstName}}</td>
+                    <td>{{lastName}}</td>
+                    <td>{{email}}</td>
+                    <td>{{zipCode}}</td>
+                </tr>
+                {{/each}}
+        </tbody>
+    </table>
 </div>
+
+<script>
+    function filterGuidesByClimate() {
+        let climate_id = document.getElementById('climate_filter').value;
+        window.location = '/home/filter/' + climate_id
+    }
+</script>

@@ -11,12 +11,13 @@ app.set('view engine', 'handlebars');
 app.set('port', process.argv[2]);
 
 // Routes
-app.use('/guides', require('./guides.js'));
+app.use('/log_in', require('./log_in.js'));
+app.use('/home', require('./home.js'));
 app.use('/climates', require('./climates.js'));
-app.use('/add-guide', require('./guides.js'));
+app.use('/add-guide', require('./home.js'));
 app.use('/update-guide', require('./update-guide.js'));
 app.use('/guides_certs', require('./guides_certs.js'));
-app.use('/', require('./guides.js')); // default route
+app.use('/', require('./home.js')); // default route
 
 app.use(function(req,res){
   res.status(404);

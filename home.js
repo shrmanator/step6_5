@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const mysql = require('./dbcon.js');
 
+homepage = 'home'
+
 function getClimates(res, context, complete){
     mysql.pool.query("SELECT climate from GuideClimates", function(error, results, fields){
         if(error){
@@ -40,7 +42,7 @@ function getGuidesByClimate(req, res, context, complete){
 // /* Find people whose fname starts with a given string in the req */
 // function getPeopleWithNameLike(req, res, mysql, context, complete) {
 //   //sanitize the input as well as include the % character
-//    var query = "SELECT bsg_people.character_id as id, fname, lname, bsg_planets.name AS homeworld, age FROM bsg_people INNER JOIN bsg_planets ON homeworld = bsg_planets.planet_id WHERE bsg_people.fname LIKE " + mysql.pool.escape(req.params.s + '%');
+//    var query = "SELECT bsg_people.character_id as id, fname, lname, bsg_planets.name AS sign_upworld, age FROM bsg_people INNER JOIN bsg_planets ON sign_upworld = bsg_planets.planet_id WHERE bsg_people.fname LIKE " + mysql.pool.escape(req.params.s + '%');
 //   console.log(query)
 //
 //   mysql.pool.query(query, function(error, results, fields){
@@ -75,13 +77,14 @@ router.get('/', function(req, res){
     function complete(){
         callbackCount++;
         if(callbackCount >= 2){
-            res.render('guides', context);
+            res.render(homepage, context);
         }
     }
 });
 
 /*Display all people from a given climate. Requires web based javascript to delete users with AJAX*/
 router.get('/filter/:climate', function(req, res){
+    console.log("guide.js 84");
     var callbackCount = 0;
     var context = {};
     getClimates(res, context, complete);
@@ -90,7 +93,7 @@ router.get('/filter/:climate', function(req, res){
         callbackCount++;
         if(callbackCount >= 2){
             // console.log(context)
-            res.render('guides', context);
+            res.render(homepage, context);
         }
     }
 });
@@ -107,13 +110,12 @@ router.get('/search/:s', function(req, res){
     function complete(){
         callbackCount++;
         if(callbackCount >= 2){
-            res.render('guides', context);
+            res.render(homepage, context);
         }
     }
 });
 
-/* Display one guide for the specific purpose of updating guides (used in home.handlebars) */
-
+/* Display one guide for the specific purpose of updating guides (used in sign_up.handlebars) */
 router.get('/:id', function(req, res){
     var callbackCount = 0;
     var context = {};
@@ -122,7 +124,7 @@ router.get('/:id', function(req, res){
     function complete(){
         callbackCount++;
         if(callbackCount >= 2){
-            res.render('home', context);
+            res.render('sign_up', context);
         }
     }
 });
@@ -142,7 +144,7 @@ router.post('/', function(req, res) {
             res.write(JSON.stringify(error));
             res.end();
         } else {
-            res.redirect('/home');
+            res.redirect('/sign_up');
         }
     });
 });
