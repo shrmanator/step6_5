@@ -3,7 +3,7 @@ const router = express.Router();
 const mysql = require('./dbcon.js');
 
 function getGuides(res, context, complete){
-    mysql.pool.query("SELECT GuideRegistrations.userID as id, firstName, lastName, password, email, zipCode From GuideRegistrations", function(error, results, fields){
+    mysql.pool.query("SELECT GuideRegistrations.email, GuideRegistrations.password FROM GuideRegistrations", function(error, results){
         if(error){
             res.write(JSON.stringify(error));
             res.end();
@@ -17,7 +17,7 @@ router.get('/', function(req, res) {
     res.render('log_in')
 })
 
-router.get('/:firstName', function(req, res){
+router.get('/:email', function(req, res){
     var callbackCount = 0;
     var context = {};
     getGuides(res, context, complete);

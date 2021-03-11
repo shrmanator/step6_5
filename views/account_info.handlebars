@@ -1,15 +1,23 @@
 <html>
-    <h1>My Account {{person.fname}} {{person.lname}}:</h1>
-    <form id="account_info" action="/home.js" method="post">
-        <input placeholder="first name" type="text" name="fname" value="{{person.fname}}"><br>
-        <input placeholder="last name" type="text" name="lname" value="{{person.lname}}"><br>
-        <select name="climate" id="planet-selector">
-        {{#each climates}}
-            <option value="{{userID}}">{{climate}}</option>
-        {{/each}}
-    </select><br>
-        Age: <input type="number" name="age" value="{{person.age}}"><br>
-    </form>
-    <button onclick="updatePerson({{person.id}})">Update</button>
-    <script defer>selectPlanet({{person.homeworld}});</script>
+    <div align="center">
+        <h3>Account Information</h3>
+        <h3>{{guide.firstName}} {{guide.lastName}}</h3><br>
+        <h3>{{email}}</h3>
+        <form id="account_info" action="/home.js" method="post">
+            <input placeholder="change first name" type="text" name="fname" value="{{guide.firstName}}"><br>
+            <input placeholder="change last name" type="text" name="lname" value="{{guide.lastName}}"><br>
+            <input placeholder="change last name" type="text" name="lname" value="{{guide.lastName}}"><br>
+            <input placeholder="change password" type="text" name="password" value="{{guide.password}}"><br>
+            <select name="add climate" id="climate-selector">
+            {{#each climates}}
+                <option value="{{userID}}">{{climate}}</option>
+            {{/each}}
+            </select>
+            <br>
+        </form>
+        <button onclick="updateGuides({{guide.userId}})">Update</button>
+        <script defer>
+            selectClimate({{guide.climate}});
+        </script>
+    </div>
 </html>

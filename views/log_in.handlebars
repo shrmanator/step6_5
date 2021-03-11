@@ -2,9 +2,7 @@
 <div align="center">
     <h3>Log In </h3>
     <form id="addGuide" action="/log_in" method="post">
-        <input id="nameId" required placeholder="first name" type="text" name="firstName">
-        <br>
-        <input required placeholder="last name" type="text" name="lastName">
+        <input id="nameId" required placeholder="email" type="text" name="email">
         <br>
         <input required placeholder="password" type="text" name="password">
         <br>
@@ -16,8 +14,7 @@
 
 <script>
     function LogIn() {
-        let firstName = document.getElementById('logIn').value;
-        console.log(firstName)
-        window.location = '/log_in/firstName/' + firstName
+        let email = document.getElementById('logIn').value;
+        window.location = '/log_in/email/' + email
     }
 </script>
