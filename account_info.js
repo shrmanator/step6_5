@@ -8,8 +8,8 @@ router.get('/', function(req, res){
 });
 
 /*
-METHOD WORKS!!!
- Adds a guide, redirects to the people page after adding */
+ Adds a guide
+ */
 router.post('/', function(req, res) {
     var sql = "INSERT INTO GuideRegistrations (firstName, lastName, password, email, zipCode, climate) VALUES (?,?,?,?,?,?)";
     var inserts = [req.body.firstName, req.body.lastName, req.body.password, req.body.email, req.body.zipCode, req.body.climate];

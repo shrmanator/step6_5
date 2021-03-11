@@ -1,11 +1,13 @@
 <html>
 <div align="center">
     <h3>Log In </h3>
-    <label for='logIn'></label><select id='logIn' name="signIn">
     <form id="addGuide" action="/log_in" method="post">
         <input id="nameId" required placeholder="first name" type="text" name="firstName">
+        <br>
         <input required placeholder="last name" type="text" name="lastName">
+        <br>
         <input required placeholder="password" type="text" name="password">
+        <br>
         <br>
         <input type="submit" value="Log in" onclick="logIn()">
     </form>
