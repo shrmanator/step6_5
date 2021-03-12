@@ -40,14 +40,14 @@ function getGuidesByClimate(req, res, context, complete){
 }
 
 function getGuide(res, context, id, complete){
-    var sql = "SELECT GuideRegistrations.userID as id, firstName, lastName,password,email,zipCode From GuideRegistrations WHERE userID = ?";
+    var sql = "SELECT GuideRegistrations.userID as id, firstName,lastName,password,email,zipCode,climate From GuideRegistrations WHERE userID = ?";
     var inserts = [id];
     mysql.pool.query(sql, inserts, function(error, results, fields){
         if(error){
             res.write(JSON.stringify(error));
             res.end();
         }
-        context.guide = results[0];
+        context.guide = results;
         complete();
     });
 }
@@ -56,11 +56,12 @@ function getGuide(res, context, id, complete){
 router.get('/', function(req, res){
     var callbackCount = 0;
     var context = {};
-    getGuides(res, context, complete);
+    getGuide(res, context, 17, complete);
     getClimates(res, context, complete);
     function complete(){
         callbackCount++;
         if(callbackCount >= 2){
+            console.log(context)
             res.render(route, context);
         }
     }
@@ -76,7 +77,6 @@ router.get('/filter/:climate', function(req, res){
     function complete(){
         callbackCount++;
         if(callbackCount >= 2){
-            // console.log(context)
             res.render(route, context);
         }
     }

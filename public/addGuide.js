@@ -1,9 +1,8 @@
-function updateGuides(id){
-    console.log("hi")
+function addGuide(id){
     $.ajax({
         url: '/add-guide/' + id,
         type: 'PUT',
-        data: $('#update-guide').serialize(),
+        data: $('#add-guide').serialize(),
             success: function(result){
                 window.location.replace("./");
         }

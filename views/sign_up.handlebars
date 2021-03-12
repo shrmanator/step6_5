@@ -4,7 +4,7 @@
 {{/each}}
 <div align="center">
     <h3>Become a Weather Vault Guide</h3>
-    <form id="addGuide" action="/guides" method="post">
+    <form id="addGuide" action="/home" method="post">
         <input required placeholder="first name" type="text" name="firstName"><br>
         <input required placeholder="last name" type="text" name="lastName"><br>
         <input required placeholder="email" type="text" name="email"><br>
@@ -18,7 +18,7 @@
         </select>
         <br>
         <br>
-        <input type="submit" value="become a guide">
+        <input type="submit" value="become a guide" onclick="addGuide()">
     </form>
     <br/>
 </div>

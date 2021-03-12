@@ -1,19 +1,20 @@
 <html>
     <div align="center">
         <h3>Your Account Information</h3>
-        <h3>{{guide.firstName}} {{guide.lastName}}</h3><br>
-        <h3>{{email}}</h3>
+        {{#each guide}}
+            <h4>{{firstName}} {{lastName}}</h4>
+            <h4>zip code: {{zipCode}}</h4>
+            <h4>{{email}}</h4>
+        {{/each}}
         <form id="account_info" action="/home.js" method="post">
             <input placeholder="change first name" type="text" name="fname" value="{{guide.firstName}}"><br>
             <input placeholder="change last name" type="text" name="lname" value="{{guide.lastName}}"><br>
             <input placeholder="change password" type="text" name="password" value="{{guide.password}}"><br>
-            <h3>Your current climates</h3>
-            <select name="current_climates" id="current-climates">
-                {{#each guides}}
-                    {{climate}}
-                {{/each}}
-            </select>
-            <h3>Add new climate</h3>
+            <h3>Your current climate</h3>
+            {{#each guide}}
+                {{climate}}
+            {{/each}}
+            <h3>Change climate</h3>
             <div align="center">
                 <select name="climates" id="climate-selector">
                 <label for='climate-filter'></label>
@@ -24,6 +25,6 @@
             </div>
         </form>
         <br>
-        <button onclick="updateGuides({{guide.userId}})">Add new climate</button>
+        <input type="button" value="update info" onclick="updateGuide(userID)">
     </div>
 </html>
