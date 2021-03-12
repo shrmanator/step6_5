@@ -4,10 +4,9 @@
     <h2> "Interested in moving to a new location with a different climate? Our Guides can help you!" </h2>
     <h2>Select your desired climate to find a knowledgeable Guide.</h2>
 </div>
-
 <div align="center">
-
-        <label for='climate_filter'></label><select id='climate_filter' name="climate">
+        <label for='climate_filter'></label>
+        <select id='climate_filter' name="climate">
             {{#each climates}}
                 <option value="{{climate}}">{{climate}}</option>
             {{/each}}
