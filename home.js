@@ -150,10 +150,10 @@ router.post('/', function(req, res) {
 });
 
 /* The URL that update data is sent to in order to update a guide */
-router.put('/:id', function(req, res){
+router.put('update/:id', function(req, res){
     // var mysql = req.app.get('mysql');
-    console.log(req.body)
-    console.log(req.params.id)
+    console.log(req.body, "body")
+    console.log(req.params.id, "id")
     var sql = "UPDATE GuideRegistrations SET firstName=?, lastName=?, email=?, climate=?, zipCode=? WHERE userID=?";
     var inserts = [req.body.firstName, req.body.lastName, req.body.email, req.body.climate, req.body.zipCode, req.params.id];
     sql = mysql.pool.query(sql,inserts,function(error, results, fields){

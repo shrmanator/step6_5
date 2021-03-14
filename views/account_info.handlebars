@@ -6,17 +6,19 @@
             <h4>zip code: {{zipCode}}</h4>
             <h4>{{email}}</h4>
         {{/each}}
-        <form id="account_info" action="/home.js" method="post">
-            <input placeholder="change first name" type="text" name="fname" value="{{guide.firstName}}"><br>
-            <input placeholder="change last name" type="text" name="lname" value="{{guide.lastName}}"><br>
-            <input placeholder="change password" type="text" name="password" value="{{guide.password}}"><br>
+        <form action="/account_info.js" method="post">
+            <input id="firstName" placeholder="change first name" type="text" name="fname" value="{{guide.firstName}}"><br>
+            <input id="lastName" placeholder="change last name" type="text" name="lname" value="{{guide.lastName}}"><br>
+            <input id="password" placeholder="change password" type="text" name="password" value="{{guide.password}}"><br>
             <h3>Your current climate</h3>
             {{#each guide}}
                 {{climate}}
             {{/each}}
+        </form>
+        <form>
             <h3>Change climate</h3>
             <div align="center">
-                <select name="climates" id="climate-selector">
+                <select name="climate" id="climate">
                 <label for='climate-filter'></label>
                 {{#each climates}}
                     <option value="{{climate}}">{{climate}}</option>
@@ -25,6 +27,22 @@
             </div>
         </form>
         <br>
-        <input type="button" value="update info" onclick="updateGuide(userID)">
+        <input type="button" value="update info" onclick="updateGuide()">
     </div>
 </html>
+
+<script type="text/javascript">
+    function updateGuide(){
+        let firstName = document.getElementById('firstName').value
+        let lastName = document.getElementById('lastName').value
+        let password = document.getElementById('password').value
+        let climate = document.getElementById('climate').value
+        let account_info = {firstName:firstName,
+                            lastName:lastName,
+                            password:password,
+                            climate:climate
+                            }
+        console.log(firstName, "the id");
+        window.location = '/account_info.js/' + account_info;
+    }
+</script>

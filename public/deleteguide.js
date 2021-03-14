@@ -8,6 +8,10 @@ function deleteGuide(id){
     })
 };
 
+
+
+
+
 function deleteGuidesCert(pid, cid){
   $.ajax({
       url: '/guides_certs/pid/' + pid + '/cert/' + cid,

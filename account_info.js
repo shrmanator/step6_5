@@ -134,7 +134,7 @@ router.post('/', function(req, res) {
 });
 
 /* The URL that update data is sent to in order to update a guide */
-router.put('/:id', function(req, res){
+router.put('/:account_info', function(req, res){
     // var mysql = req.app.get('mysql');
     console.log(req.body)
     console.log(req.params.id)
